@@ -19,8 +19,19 @@ function draw() {
   car1.radius = radSlider.value();
   car1.mass = massSlider.value();
 
-  velSlider.input(updateCarAngVel);
+
+  // make sure angvelslider doesnt overshoot
   angvelSlider.input(updateCarVel);
+  if (angvelSlider.value() >= 1.5) {
+    velSlider.attribute('disabled', '');
+
+    updateCarAngVel();
+    updateCarVel();
+  } else if (angvelSlider.value() < 1.5) {
+    velSlider.removeAttribute('disabled');
+    let temp = velSlider.value();
+  }
+  velSlider.input(updateCarAngVel);
   radSlider.input(updateCarVel);
 
   
@@ -32,7 +43,7 @@ function drawSidebarSliders() {
   radSlider.position(1000, 100);
   velSlider = createSlider(0, 28.5, 17.25, 0.5);
   velSlider.position(1000, 200);
-  angvelSlider = createSlider(0, 1.5, 2, 0.1);
+  angvelSlider = createSlider(0, 1.5, 1, 0.1);
   angvelSlider.position(1000, 300);
   massSlider = createSlider(1000, 2500, 1500, 10);
   massSlider.position(1000, 400);
@@ -40,12 +51,12 @@ function drawSidebarSliders() {
 
 function drawSidebarText() {
   
-  text("Angular Velocity = " + round(car1.angvel, 1), 1000, 350);
+  text("Angular Velocity = " + round(car1.angvel, 2), 1000, 350);
   text("Mass = " + car1.mass, 1000, 450);
   text("F_Centripetal = " + round(car1.cforce), 1000, 500);
-  text("Radius = " + round(car1.trueradius, 1), 1000, 150);
+  text("Radius = " + round(car1.trueradius, 2), 1000, 150);
   text("Raw Radius = " + car1.radius, 1000, 650);
-  text("Velocity = " + round(car1.velocity, 1), 1000, 250);
+  text("Velocity = " + round(car1.velocity, 2), 1000, 250);
 }
 
 function drawTrack() {
