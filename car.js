@@ -33,10 +33,19 @@ class Car {
     }
 
     updateAngVel() {
+        this.constraints();
         this.angvel = this.velocity / this.trueradius;
     }
 
     updateVel() {
+        this.constraints();
         this.velocity = this.angvel * this.trueradius;
+    }
+
+    contraints() {
+        this.constraints();
+        constrain(0, 1.5, this.angvel);
+        constrain(0, 28.5, this.velocity);
+        constrain(0, 19, radius);
     }
 }
