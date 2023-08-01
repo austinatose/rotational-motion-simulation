@@ -55,8 +55,7 @@ class Car {
     
     pressed() {
         // Did I click on the rectangle?
-        if (mouseX > this.pos.x - 12.5 && mouseX < this.pos.x + 12.5 && mouseY > this.pos.y - 25 && mouseY < this.pos.y + 25 && pause) {
-            console.log("pressed");
+        if (this.checkMouseOver()) {
             this.dragging = true;
             
         }
@@ -66,6 +65,14 @@ class Car {
         // Quit dragging
         
         this.dragging = false;
+    }
+
+    checkMouseOver() {
+        if (mouseX > this.pos.x - 12.5 && mouseX < this.pos.x + 12.5 && mouseY > this.pos.y - 25 && mouseY < this.pos.y + 25 && pause) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     updateAngVel() {
