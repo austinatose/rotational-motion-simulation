@@ -1,11 +1,13 @@
 let carArray = [];
 let lastCar;
+let uniquelastCar;
 let pause = true;
 
 function setup() {
   createCanvas(1200, 700); // 16:10
   carArray.push(new Car(100, 100));
   lastCar = carArray[0];
+  uniquelastCar = carArray[0];
 
   drawSidebarSliders();
 }
@@ -29,8 +31,14 @@ function draw() {
     currCar.update();
   }
 
-  // check for value update
-  // car1.mass = massSlider.value();
+  currCar = getDraggedCar();
+  if (currCar.dragging) {
+    massSlider.value(currCar.mass);
+  } else if (currCar == lastCar) {
+    lastCar.mass = massSlider.value();
+  }
+  
+  updateCarVel(currCar);
 
 
   // make sure angvelslider doesnt overshoot
@@ -55,39 +63,18 @@ function drawSidebarText() {
 
   // loop all cars
   for (let i = 0; i < carArray.length; i++) {
-    currCar = carArray[i];
-
-    // check which was was moused over
-    if (currCar.dragging) {
-      text("Angular Velocity = " + round(currCar.angvel, 2), 1000, 350);
-      text("Mass = " + currCar.mass, 1000, 450);
-      text("F_Centripetal = " + round(currCar.cforce), 1000, 500);
-      text("Radius = " + round(currCar.trueradius, 2), 1000, 100);
-      text("Raw Radius = " + currCar.radius, 1000, 650);
-      text("Velocity = " + round(currCar.velocity, 2), 1000, 150);
-      text("xpos = " + round(currCar.pos.x, 2) + " " + String(mouseX), 1000, 550);
-      text("ypos = " + round(currCar.pos.y, 2) + " " + String(mouseY), 1000, 600);
-      text("pause = " + pause, 1000, 700);
-      text("dragging = " + currCar.dragging, 800, 650);
-
-      lastCar = currCar;
-      break;
-    } 
-
-    if (i == carArray.length - 1) {
-      text("Angular Velocity = " + round(lastCar.angvel, 2), 1000, 350);
-      text("Mass = " + lastCar.mass, 1000, 450);
-      text("F_Centripetal = " + round(lastCar.cforce), 1000, 500);
-      text("Radius = " + round(lastCar.trueradius, 2), 1000, 100);
-      text("Raw Radius = " + lastCar.radius, 1000, 650);
-      text("Velocity = " + round(lastCar.velocity, 2), 1000, 150);
-      text("xpos = " + round(lastCar.pos.x, 2) + " " + String(mouseX), 1000, 550);
-      text("ypos = " + round(lastCar.pos.y, 2) + " " + String(mouseY), 1000, 600);
-      text("pause = " + pause, 1000, 700);
-      text("dragging = " + lastCar.dragging, 800, 650);
-    }
+    currCar = getDraggedCar();
+    text("Angular Velocity = " + round(currCar.angvel, 2), 1000, 350);
+    text("Mass = " + currCar.mass, 1000, 450);
+    text("F_Centripetal = " + round(currCar.cforce), 1000, 500);
+    text("Radius = " + round(currCar.trueradius, 2), 1000, 100);
+    text("Raw Radius = " + currCar.radius, 1000, 650);
+    text("Velocity = " + round(currCar.velocity, 2), 1000, 150);
+    text("xpos = " + round(currCar.pos.x, 2) + " " + String(mouseX), 1000, 550);
+    text("ypos = " + round(currCar.pos.y, 2) + " " + String(mouseY), 1000, 600);
+    text("pause = " + pause, 1000, 700);
+    text("dragging = " + currCar.dragging, 800, 650);
   }
-  
 }
 
 function drawTrack() {
@@ -98,16 +85,33 @@ function drawTrack() {
   fill(0);
 }
 
-function updateCarVel() {
-  /*
+function updateCarVel(car1) {
+  
   car1.angvel = angvelSlider.value();
   car1.velocity = car1.angvel * car1.trueradius;
-  */
+  
 }
 
 function mousePressed() {
   for (let i = 0; i < carArray.length; i++) {
     carArray[i].pressed();
+  }
+}
+
+function getDraggedCar() {
+  for (let i = 0; i < carArray.length; i++) {
+    currCar = carArray[i];
+
+    // check which was was moused over
+    if (currCar.dragging) {
+      lastCar = currCar;
+      if (uniquelastCar != lastCar) uniquelastCar = lastCar;
+      return currCar;
+    } 
+
+    if (i == carArray.length - 1) {
+      return lastCar;
+    }
   }
 }
 
