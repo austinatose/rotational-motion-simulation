@@ -16,7 +16,6 @@ class Car {
         // car is 1.8 m wide, size multiplier to turn pixels to metres
 
         this.dragging = false;
-        this.pause = true;
     }
 
     display() {
@@ -30,18 +29,18 @@ class Car {
 
     update() {
         // dragging
-        if (this.pause && this.dragging) {
+        if (pause && this.dragging) {
             this.pos.x = mouseX;
             this.pos.y = mouseY;
         }
 
         this.radius = dist(this.pos.x, this.pos.y, this.rotcentre.x, this.rotcentre.y)
         constrain(this.radius, 100, 300);
-        if (this.pause && !this.checkOOB()) {
+        if (pause && !this.checkOOB()) {
             this.angle = atan2(this.pos.y - this.rotcentre.y, this.pos.x - this.rotcentre.x);
         }
 
-        if (!this.pause && !this.checkOOB()) {
+        if (!pause && !this.checkOOB()) {
             this.angle += -this.angvel * deltaTime / 1000;
             this.pos.x = this.rotcentre.x + cos(this.angle) * this.radius;
             this.pos.y = this.rotcentre.y + sin(this.angle) * this.radius;
@@ -56,7 +55,7 @@ class Car {
     
     pressed() {
         // Did I click on the rectangle?
-        if (mouseX > this.pos.x - 12.5 && mouseX < this.pos.x + 12.5 && mouseY > this.pos.y - 25 && mouseY < this.pos.y + 25 && this.pause) {
+        if (mouseX > this.pos.x - 12.5 && mouseX < this.pos.x + 12.5 && mouseY > this.pos.y - 25 && mouseY < this.pos.y + 25 && pause) {
             console.log("pressed");
             this.dragging = true;
             
