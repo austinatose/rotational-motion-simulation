@@ -1,14 +1,17 @@
 let carArray = [];
+let lastCar;
 let pause = true;
 
 function setup() {
   createCanvas(1200, 700); // 16:10
   carArray.push(new Car(100, 100));
+  lastCar = carArray[0];
 
   drawSidebarSliders();
 }
 
-let lastCar = carArray[0];
+// console.log(lastCar);
+// console.log(carArray);
 
 function draw() {
   background(220);
@@ -68,20 +71,22 @@ function drawSidebarText() {
       text("dragging = " + currCar.dragging, 800, 650);
 
       lastCar = currCar;
+      break;
     } 
+
+    if (i == carArray.length - 1) {
+      text("Angular Velocity = " + round(lastCar.angvel, 2), 1000, 350);
+      text("Mass = " + lastCar.mass, 1000, 450);
+      text("F_Centripetal = " + round(lastCar.cforce), 1000, 500);
+      text("Radius = " + round(lastCar.trueradius, 2), 1000, 100);
+      text("Raw Radius = " + lastCar.radius, 1000, 650);
+      text("Velocity = " + round(lastCar.velocity, 2), 1000, 150);
+      text("xpos = " + round(lastCar.pos.x, 2) + " " + String(mouseX), 1000, 550);
+      text("ypos = " + round(lastCar.pos.y, 2) + " " + String(mouseY), 1000, 600);
+      text("pause = " + pause, 1000, 700);
+      text("dragging = " + lastCar.dragging, 800, 650);
+    }
   }
-  
-  text("Angular Velocity = " + round(lastCar.angvel, 2), 1000, 350);
-  text("Mass = " + lastCar.mass, 1000, 450);
-  text("F_Centripetal = " + round(lastCar.cforce), 1000, 500);
-  text("Radius = " + round(lastCar.trueradius, 2), 1000, 100);
-  text("Raw Radius = " + lastCar.radius, 1000, 650);
-  text("Velocity = " + round(lastCar.velocity, 2), 1000, 150);
-  text("xpos = " + round(lastCar.pos.x, 2) + " " + String(mouseX), 1000, 550);
-  text("ypos = " + round(lastCar.pos.y, 2) + " " + String(mouseY), 1000, 600);
-  text("pause = " + pause, 1000, 700);
-  text("dragging = " + lastCar.dragging, 800, 650);
-  
   
 }
 
