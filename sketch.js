@@ -62,7 +62,12 @@ function drawSidebarSliders() {
   showVectorToggle = createButton('Show / Hide Vectors');
   showVectorToggle.position(1000, 450);
   showVectorToggle.mousePressed(toggleShowVector);
-  deleteCarButton = createButton('Delete Car');
+  deleteCarButton = createButton('Clear Cars');
+  deleteCarButton.position(1000, 475);
+  deleteCarButton.mousePressed(deleteCars);
+  helpButton = createButton('Help');
+  helpButton.position(1100, 600);
+  helpButton.mousePressed();
 }
 
 function drawSidebarText() {
@@ -135,4 +140,11 @@ function toggleShowVector() {
   for (let i = 0; i < carArray.length; i++) {
     carArray[i].showVectorToggle = !carArray[i].showVectorToggle;
   }
+}
+
+function deleteCars() {
+  carArray = [];
+  carArray.push(new Car(100, 100));
+  lastCar = carArray[0];
+  uniquelastCar = carArray[0];
 }
