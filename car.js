@@ -34,9 +34,9 @@ class Car {
             stroke(0, 0, 255);
             strokeWeight(2);
             line(0, 0, )
-            line(0, 0, -this.cforce * 10, 0);
-            line(-this.cforce / 100, 0, -this.cforce / 100 + 10, -10);
-            line(-this.cforce / 100, 0, -this.cforce / 100 + 10, 10);
+            line(0, 0, -this.cforce / 70, 0);
+            line(-this.cforce / 70, 0, -this.cforce / 70 + 10, -10);
+            line(-this.cforce / 70, 0, -this.cforce / 70 + 10, 10);
             pop();
             
             // velocity arrow pointing tangent to the circle
