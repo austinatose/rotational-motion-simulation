@@ -25,7 +25,7 @@ function draw() {
     currCar.display();
 
     if (!pause) {
-      updateCarVel(currCar);
+      currCar.velocity = currCar.angvel * currCar.trueradius;
     } 
 
     currCar.update();
@@ -34,11 +34,13 @@ function draw() {
   currCar = getDraggedCar();
   if (currCar.dragging) {
     massSlider.value(currCar.mass);
+    angvelSlider.value(currCar.angvel);
   } else if (currCar == lastCar) {
     lastCar.mass = massSlider.value();
+    lastCar.angvel = angvelSlider.value();
   }
   
-  updateCarVel(currCar);
+
 
 
   // make sure angvelslider doesnt overshoot
@@ -48,33 +50,40 @@ function draw() {
 
 function drawSidebarSliders() {
   angvelSlider = createSlider(0, 1.5, 1, 0.1);
-  angvelSlider.position(1000, 300);
+  angvelSlider.position(1000, 200);
   massSlider = createSlider(1000, 2500, 1500, 10);
-  massSlider.position(1000, 400);
-  pauseButton = createButton('Pause');
-  pauseButton.position(1000, 500);
+  massSlider.position(1000, 300);
+  pauseButton = createButton("Play / Pause");
+  pauseButton.position(1000, 400);
   pauseButton.mousePressed(togglePause);
   createCarButton = createButton('Create Car');
-  createCarButton.position(1000, 600);
+  createCarButton.position(1000, 425);
   createCarButton.mousePressed(createCar);
+  showVectorToggle = createButton('Show / Hide Vectors');
+  showVectorToggle.position(1000, 450);
+  showVectorToggle.mousePressed(toggleShowVector);
+  deleteCarButton = createButton('Delete Car');
 }
 
 function drawSidebarText() {
+  // nice looking border rectangle with rounded corners
+  fill(0, 0, 0, 0);
+  rect(975, 50, 200, 500, 20);
 
   // loop all cars
+  fill(0);
   for (let i = 0; i < carArray.length; i++) {
     currCar = getDraggedCar();
-    text("Angular Velocity = " + round(currCar.angvel, 2), 1000, 350);
-    text("Mass = " + currCar.mass, 1000, 450);
-    text("F_Centripetal = " + round(currCar.cforce), 1000, 500);
+    text("Angular Velocity = " + round(currCar.angvel, 2), 1000, 250);
+    text("Mass = " + currCar.mass, 1000, 350);
+    // text("F_Centripetal = " + round(currCar.cforce), 1000, 400);
     text("Radius = " + round(currCar.trueradius, 2), 1000, 100);
-    text("Raw Radius = " + currCar.radius, 1000, 650);
+    // text("Raw Radius = " + currCar.radius, 1000, 650);
     text("Velocity = " + round(currCar.velocity, 2), 1000, 150);
-    text("xpos = " + round(currCar.pos.x, 2) + " " + String(mouseX), 1000, 550);
-    text("ypos = " + round(currCar.pos.y, 2) + " " + String(mouseY), 1000, 600);
-    text("pause = " + pause, 1000, 700);
-    text("dragging = " + currCar.dragging, 800, 650);
+    // text("pause = " + pause, 1000, 700);
+    // text("dragging = " + currCar.dragging, 800, 650);
   }
+  text(pause ? "Paused" : "Playing", 1000, 575);
 }
 
 function drawTrack() {
@@ -83,13 +92,6 @@ function drawTrack() {
   circle(450, 350, 100);
   
   fill(0);
-}
-
-function updateCarVel(car1) {
-  
-  car1.angvel = angvelSlider.value();
-  car1.velocity = car1.angvel * car1.trueradius;
-  
 }
 
 function mousePressed() {
@@ -127,4 +129,10 @@ function togglePause() {
 
 function createCar() {
   carArray.push(new Car(100, 100));
+}
+
+function toggleShowVector() {
+  for (let i = 0; i < carArray.length; i++) {
+    carArray[i].showVectorToggle = !carArray[i].showVectorToggle;
+  }
 }

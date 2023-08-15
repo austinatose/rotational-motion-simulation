@@ -13,6 +13,8 @@ class Car {
         this.cforce = this.mass * this.radius * this.angvel^2; // centripetal force
         this.offsetX = 0;
         this.offsetY = 0;
+        this.showVector = true;
+        this.showVectorToggle = true;
         // car is 1.8 m wide, size multiplier to turn pixels to metres
 
         this.dragging = false;
@@ -24,10 +26,39 @@ class Car {
         rotate(this.angle);
         rectMode(CENTER);
         rect(0, 0, 25, 50);
+
+        // draw vector triangle corresponding to velocity and angular acceleration
+        if (this.showVector) {
+            // angular acceleration arrow pointing towards centre
+            push();
+            stroke(0, 0, 255);
+            strokeWeight(2);
+            line(0, 0, )
+            line(0, 0, -this.cforce * 10, 0);
+            line(-this.cforce / 100, 0, -this.cforce / 100 + 10, -10);
+            line(-this.cforce / 100, 0, -this.cforce / 100 + 10, 10);
+            pop();
+            
+            // velocity arrow pointing tangent to the circle
+            push();
+            stroke(255, 0, 0);
+            strokeWeight(2);
+            line(0, 0, 0, -this.velocity * 10);
+            line(0, -this.velocity * 10, -10, -this.velocity * 10 + 10);
+            line(0, -this.velocity * 10, 10, -this.velocity * 10 + 10);
+
+            pop();
+
+
+        }
+
         pop();
     }
 
     update() {
+
+        this.showVector = !this.checkOOB() && this.showVectorToggle;
+
         // dragging
         if (pause && this.dragging) {
             this.pos.x = mouseX;
