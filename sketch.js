@@ -84,11 +84,11 @@ function drawSidebarText() {
     text("Radius = " + round(currCar.trueradius, 2) + " m", 1000, 100);
     // text("Raw Radius = " + currCar.radius, 1000, 650);
     text("Velocity = " + round(currCar.velocity, 2) + " m/s", 1000, 150);
-    text("angle = " + round(currCar.angle, 2) + " rad", 1000, 600);
+    // text("angle = " + round(currCar.angle, 2) + " rad", 1000, 600);
     // text("pause = " + pause, 1000, 700);
     // text("dragging = " + currCar.dragging, 800, 650);
   }
-  text(pause ? "Paused" : "Playing", 1000, 575);
+  // text(pause ? "Paused" : "Playing", 1000, 575);
 }
 
 function drawTrack() {
