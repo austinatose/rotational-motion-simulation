@@ -99,8 +99,12 @@ function drawTrack() {
   fill(0);
 }
 
-function toggleHelp() {
-  helpshown = !helpshown;
+function drawHelp() {
+
+}
+
+function drawTutorial() {
+  text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track.", 100, 100);
 }
 
 function mousePressed() {
@@ -130,6 +134,10 @@ function mouseReleased() {
   for (let i = 0; i < carArray.length; i++) {
     carArray[i].released();
   }
+}
+
+function toggleHelp() {
+  helpshown = !helpshown;
 }
 
 function togglePause() {
