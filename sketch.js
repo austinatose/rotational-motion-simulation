@@ -6,6 +6,7 @@ let helpshown = false;
 
 function setup() {
   createCanvas(1200, 700); // 16:10
+  angleMode(RADIANS);
   carArray.push(new Car(100, 100));
   lastCar = carArray[0];
   uniquelastCar = carArray[0];
@@ -77,12 +78,13 @@ function drawSidebarText() {
   fill(0);
   for (let i = 0; i < carArray.length; i++) {
     currCar = getDraggedCar();
-    text("Angular Velocity = " + round(currCar.angvel, 2), 1000, 250);
-    text("Mass = " + currCar.mass, 1000, 350);
+    text("Angular Velocity = " + round(currCar.angvel, 2) + " rad/s", 1000, 250);
+    text("Mass = " + currCar.mass + " kg", 1000, 350);
     // text("F_Centripetal = " + round(currCar.cforce), 1000, 400);
-    text("Radius = " + round(currCar.trueradius, 2), 1000, 100);
+    text("Radius = " + round(currCar.trueradius, 2) + " m", 1000, 100);
     // text("Raw Radius = " + currCar.radius, 1000, 650);
-    text("Velocity = " + round(currCar.velocity, 2), 1000, 150);
+    text("Velocity = " + round(currCar.velocity, 2) + " m/s", 1000, 150);
+    text("angle = " + round(currCar.angle, 2) + " rad", 1000, 600);
     // text("pause = " + pause, 1000, 700);
     // text("dragging = " + currCar.dragging, 800, 650);
   }
