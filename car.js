@@ -66,7 +66,7 @@ class Car {
         }
 
         this.radius = dist(this.pos.x, this.pos.y, this.rotcentre.x, this.rotcentre.y)
-        constrain(this.radius, 100, 300);
+        constrain(this.radius, 100, 320);
         if (pause && !this.checkOOB()) {
             this.angle = atan2(this.pos.y - this.rotcentre.y, this.pos.x - this.rotcentre.x);
         }
@@ -123,7 +123,7 @@ class Car {
     }
 
     checkOOB() {
-        if (dist(this.pos.x, this.pos.y, this.rotcentre.x, this.rotcentre.y) > 300) {
+        if (dist(this.pos.x, this.pos.y, this.rotcentre.x, this.rotcentre.y) > 320) {
             return true;
         }
     }

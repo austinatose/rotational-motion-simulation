@@ -2,6 +2,7 @@ let carArray = [];
 let lastCar;
 let uniquelastCar;
 let pause = true;
+let helpshown = false;
 
 function setup() {
   createCanvas(1200, 700); // 16:10
@@ -39,9 +40,6 @@ function draw() {
     lastCar.mass = massSlider.value();
     lastCar.angvel = angvelSlider.value();
   }
-  
-
-
 
   // make sure angvelslider doesnt overshoot
 
@@ -53,7 +51,7 @@ function drawSidebarSliders() {
   angvelSlider.position(1000, 200);
   massSlider = createSlider(1000, 2500, 1500, 10);
   massSlider.position(1000, 300);
-  pauseButton = createButton("Play / Pause");
+  pauseButton = createButton("Play");
   pauseButton.position(1000, 400);
   pauseButton.mousePressed(togglePause);
   createCarButton = createButton('Create Car');
@@ -67,7 +65,7 @@ function drawSidebarSliders() {
   deleteCarButton.mousePressed(deleteCars);
   helpButton = createButton('Help');
   helpButton.position(1100, 600);
-  helpButton.mousePressed();
+  helpButton.mousePressed(toggleHelp);
 }
 
 function drawSidebarText() {
@@ -97,6 +95,10 @@ function drawTrack() {
   circle(450, 350, 100);
   
   fill(0);
+}
+
+function toggleHelp() {
+  helpshown = !helpshown;
 }
 
 function mousePressed() {
@@ -130,6 +132,12 @@ function mouseReleased() {
 
 function togglePause() {
   pause = !pause;
+  pauseButton.remove();
+
+  pauseButton = createButton(pause ? "Play" : "Pause");
+  pauseButton.position(1000, 400);
+  pauseButton.mousePressed(togglePause);
+
 }
 
 function createCar() {
