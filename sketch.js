@@ -42,9 +42,10 @@ function draw() {
     lastCar.angvel = angvelSlider.value();
   }
 
-  // make sure angvelslider doesnt overshoot
-  
-  
+  // handle help
+  if (helpshown) {
+    drawHelp();
+  }
 }
 
 function drawSidebarSliders() {
@@ -101,8 +102,18 @@ function drawTrack() {
 
 function drawHelp() {
   // nice looking border rectangle with rounded corners, but over whole canvas
-  fill(0, 0, 0, 0);
-  rect(100, 100, 1100, 600, 20);
+  fill(255, 255, 255)
+  rect(50, 50, 900, 500, 20);
+
+  fill(0);
+  textSize(60);
+  text("Help", 100, 100);
+  textSize(12);
+  text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track.", 100, 150);
+  text("Mass: \n The mass of the car affects the centripetal force acting on the car. \n The greater the mass, the greater the centripetal force.", 100, 200);
+  text("Angular Velocity: \n The angular velocity of the car affects the centripetal force acting on the car. \n The greater the angular velocity, the greater the centripetal force.", 100, 300);
+  text("Centripetal Force: \n The centripetal force is the force acting on the car towards the centre of the circle.", 100, 400);
+  text("Radius: \n The radius of the track affects the centripetal force acting on the car. \n The greater the radius, the greater the centripetal force.", 100, 500);      
 }
 
 function drawTutorial() {
