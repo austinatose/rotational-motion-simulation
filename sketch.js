@@ -65,7 +65,7 @@ function drawSidebarSliders() {
   deleteCarButton.position(1000, 475);
   deleteCarButton.mousePressed(deleteCars);
   helpButton = createButton('Help');
-  helpButton.position(1100, 600);
+  helpButton.position(1000, 500);
   helpButton.mousePressed(toggleHelp);
 }
 

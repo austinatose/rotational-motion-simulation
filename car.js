@@ -11,7 +11,7 @@ class Car {
         this.radius = 200; // distance from rotcentre
         this.trueradius = (this.radius - 100) * 1.8 / 100 + 5.4; // actual radius of track (m)
         this.cforce = this.mass * this.radius * this.angvel^2; // centripetal force
-        this,scale = 1;
+        this.scale = 1;
         this.showVector = true;
         this.showVectorToggle = true;
         // car is 1.8 m wide, size multiplier to turn pixels to metres
@@ -28,13 +28,19 @@ class Car {
 
         // draw vector triangle corresponding to velocity and angular acceleration
         if (this.showVector) {
-            // angular acceleration arrow pointing towards centre
+            // centripetal acceleration arrow pointing towards centre
             push();
             stroke(0, 0, 255);
             strokeWeight(2);
             line(0, 0, -this.cforce / 70, 0);
             line(-this.cforce / 70, 0, -this.cforce / 70 + 10, -10);
             line(-this.cforce / 70, 0, -this.cforce / 70 + 10, 10);
+            pop();
+
+            //text for centripetal acceleration
+            push();
+            fill(0, 0, 0);
+            text(round(this.cforce, 2) + "N", -this.cforce / 70 / 2, -10);
             pop();
             
             // velocity arrow pointing tangent to the circle
@@ -44,7 +50,12 @@ class Car {
             line(0, 0, 0, -this.velocity * 10);
             line(0, -this.velocity * 10, -10, -this.velocity * 10 + 10);
             line(0, -this.velocity * 10, 10, -this.velocity * 10 + 10);
+            pop();
 
+            //text for velocity
+            push();
+            fill(0, 0, 0);
+            text(round(this.velocity, 2) + "m/s", 10, -this.velocity * 10 / 2);
             pop();
         }
 
