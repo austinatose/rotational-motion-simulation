@@ -24,7 +24,18 @@ class Car {
         translate(this.pos.x, this.pos.y);
         rotate(this.angle);
         rectMode(CENTER);
+        // car body
         rect(0, 0, 25 * this.scale, 50 * this.scale);
+        // wheels
+        rect(-12.5 * this.scale, -16 * this.scale, 5 * this.scale, 10 * this.scale);
+        rect(12.5 * this.scale, -16 * this.scale, 5 * this.scale, 10 * this.scale);
+        rect(-12.5 * this.scale, 16 * this.scale, 5 * this.scale, 10 * this.scale);
+        rect(12.5 * this.scale, 16 * this.scale, 5 * this.scale, 10 * this.scale);
+        fill(255, 255, 255);
+        noStroke();
+        // spoiler
+        rect(this.scale, 30 * this.scale, 25 * this.scale, 5 * this.scale);
+
 
         // draw vector triangle corresponding to velocity and angular acceleration
         if (this.showVector) {
@@ -63,6 +74,9 @@ class Car {
     }
 
     update() {
+        if (this.checkOOB()) {
+            this.angle = 0;
+        }
 
         this.showVector = !this.checkOOB() && this.showVectorToggle;
 

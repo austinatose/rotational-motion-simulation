@@ -43,7 +43,7 @@ function draw() {
   }
 
   // make sure angvelslider doesnt overshoot
-
+  
   
 }
 
@@ -100,7 +100,9 @@ function drawTrack() {
 }
 
 function drawHelp() {
-
+  // nice looking border rectangle with rounded corners, but over whole canvas
+  fill(0, 0, 0, 0);
+  rect(100, 100, 1100, 600, 20);
 }
 
 function drawTutorial() {
@@ -138,6 +140,11 @@ function mouseReleased() {
 
 function toggleHelp() {
   helpshown = !helpshown;
+  helpButton.remove();
+
+  helpButton = createButton(helpshown ? "Hide Help" : "Help");
+  helpButton.position(1000, 500);
+  helpButton.mousePressed(toggleHelp);
 }
 
 function togglePause() {
@@ -147,7 +154,6 @@ function togglePause() {
   pauseButton = createButton(pause ? "Play" : "Pause");
   pauseButton.position(1000, 400);
   pauseButton.mousePressed(togglePause);
-
 }
 
 function createCar() {
