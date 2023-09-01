@@ -42,7 +42,7 @@ function draw() {
     lastCar.angvel = angvelSlider.value();
   }
 
-  // handle help
+  // handle help screen
   if (helpshown) {
     drawHelp();
   }
