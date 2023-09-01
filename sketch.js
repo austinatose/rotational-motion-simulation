@@ -99,7 +99,6 @@ function drawTrack() {
   
   fill(0);
 }
-
 function drawHelp() {
   // nice looking border rectangle with rounded corners, but over whole canvas
   fill(255, 255, 255)
@@ -115,6 +114,7 @@ function drawHelp() {
   text("Centripetal Force: \n The centripetal force is the force acting on the car towards the centre of the circle.", 100, 400);
   text("Radius: \n The radius of the track affects the centripetal force acting on the car. \n The greater the radius, the greater the centripetal force.", 100, 500);      
 }
+
 
 function drawTutorial() {
   text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track.", 100, 100);
