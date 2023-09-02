@@ -71,13 +71,13 @@ function drawSidebarSliders() {
   createCarButton = createButton('Create Car');
   createCarButton.position(1000, 425);
   createCarButton.mousePressed(createCar);
-  showVectorToggle = createButton('Show / Hide Vectors');
+  showVectorToggle = createButton('Hide Vectors');
   showVectorToggle.position(1000, 450);
   showVectorToggle.mousePressed(toggleShowVector);
   deleteCarButton = createButton('Reset');
   deleteCarButton.position(1000, 475);
   deleteCarButton.mousePressed(reset);
-  helpButton = createButton('Help');
+  helpButton = createButton('Show Help');
   helpButton.position(1000, 500);
   helpButton.mousePressed(toggleHelp);
 }
@@ -116,15 +116,23 @@ function drawTrack() {
 }
 
 function drawHelp() {
-  // nice looking border rectangle with rounded corners, but over whole canvas
-  fill(255, 255, 255)
-  rect(800, 575, 350, 100, 20);
-
+  // purpose of vectors
+  push();
+  fill(0, 0, 0, 0);
+  rect(750, 50, 200, 100, 20);
   fill(0);
-  textSize(20);
-  text("Help", 850, 650);
   textSize(12);
-  text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track.", 800, 600);
+  text(" The blue arrow represents the \n centripetal force acting on the car. \n\n The red arrow represents the \n velocity of the car.", 755, 75);
+  pop();
+
+  // thinking questions
+  push();
+  fill(0, 0, 0, 0);
+  rect(750, 575, 425, 110, 20);
+  fill(0);
+  textSize(14);
+  text(" How do the following factors affect the length of the arrows? \n\n Distance of the car from the centre \n Angular velocity of the car \n Mass of the car", 755, 600);
+  pop();
 }
 
 
@@ -173,7 +181,7 @@ function toggleHelp() {
   helpshown = !helpshown;
   helpButton.remove();
 
-  helpButton = createButton(helpshown ? "Hide Help" : "Help");
+  helpButton = createButton(helpshown ? "Hide Help" : "Show Help");
   helpButton.position(1000, 500);
   helpButton.mousePressed(toggleHelp);
 }
@@ -195,6 +203,10 @@ function toggleShowVector() {
   for (let i = 0; i < carArray.length; i++) {
     carArray[i].showVectorToggle = !carArray[i].showVectorToggle;
   }
+  showVectorToggle.remove();
+  showVectorToggle = createButton(carArray[0].showVectorToggle ? "Hide Vectors" : "Show Vectors");
+  showVectorToggle.position(1000, 450);
+  showVectorToggle.mousePressed(toggleShowVector);
 }
 
 function reset() {
@@ -202,5 +214,6 @@ function reset() {
   carArray.push(new Car(100, 100));
   lastCar = carArray[0];
   uniquelastCar = carArray[0];
+  pause = false;
   togglePause();
 }
