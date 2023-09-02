@@ -35,7 +35,8 @@ function draw() {
 
     currCar.update();
   }
-
+  
+  // handles the sliders staying on car even after it is released
   currCar = getDraggedCar();
   if (currCar.dragging) {
     massSlider.value(currCar.mass);
@@ -160,13 +161,14 @@ function getDraggedCar() {
   for (let i = 0; i < carArray.length; i++) {
     currCar = carArray[i];
 
-    // check which was was moused over
+    // check which was last moused over
     if (currCar.dragging) {
       lastCar = currCar;
       if (uniquelastCar != lastCar) uniquelastCar = lastCar;
       return currCar;
     } 
-
+    
+    // only car exception
     if (i == carArray.length - 1) {
       return lastCar;
     }
