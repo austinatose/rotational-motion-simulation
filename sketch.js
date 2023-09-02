@@ -6,12 +6,14 @@ let helpshown = false;
 let tutorialshown = true;
 
 function setup() {
-  createCanvas(1200, 700); // 16:10
+  fill(220);
+  createCanvas(1200, 700);
   angleMode(RADIANS);
   carArray.push(new Car(100, 100));
   lastCar = carArray[0];
   uniquelastCar = carArray[0];
 
+  // needs to be drawn separately from text
   drawSidebarSliders();
 }
 
