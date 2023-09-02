@@ -48,11 +48,14 @@ class Car {
             line(-this.cforce / 70, 0, -this.cforce / 70 + 10, 10);
             pop();
 
-            //text for centripetal acceleration
-            push();
-            fill(0, 0, 0);
-            text(round(this.cforce, 2) + "N", -this.cforce / 70 / 2, -10);
-            pop();
+            // text for centripetal acceleration
+            // only if arrow is long enough
+            if (this.cforce / 70 > 100) {
+                push();
+                fill(0, 0, 0);
+                text(round(this.cforce, 2) + "N", -this.cforce / 70 / 2, -10);
+                pop();
+            }
             
             // velocity arrow pointing tangent to the circle
             push();
@@ -63,11 +66,14 @@ class Car {
             line(0, -this.velocity * 10, 10, -this.velocity * 10 + 10);
             pop();
 
-            //text for velocity
-            push();
-            fill(0, 0, 0);
-            text(round(this.velocity, 2) + "m/s", 10, -this.velocity * 10 / 2);
-            pop();
+            // text for velocity
+            // only if arrow is long enough
+            if (this.velocity * 10 > 80) {
+                push();
+                fill(0, 0, 0);
+                text(round(this.velocity, 2) + "m/s", 10, -this.velocity * 10 / 2);
+                pop();
+            }
         }
 
         pop();
