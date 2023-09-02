@@ -3,6 +3,7 @@ let lastCar;
 let uniquelastCar;
 let pause = true;
 let helpshown = false;
+let tutorialshown = true;
 
 function setup() {
   createCanvas(1200, 700); // 16:10
@@ -46,6 +47,17 @@ function draw() {
   if (helpshown) {
     drawHelp();
   }
+
+  // tutorial handling
+
+  // hide tutorial upon first drag of car
+  if (tutorialshown && uniquelastCar.dragging) {
+    tutorialshown = false;
+  }
+
+  if (tutorialshown) {
+    drawTutorial();
+  }
 }
 
 function drawSidebarSliders() {
@@ -62,9 +74,9 @@ function drawSidebarSliders() {
   showVectorToggle = createButton('Show / Hide Vectors');
   showVectorToggle.position(1000, 450);
   showVectorToggle.mousePressed(toggleShowVector);
-  deleteCarButton = createButton('Clear Cars');
+  deleteCarButton = createButton('Reset');
   deleteCarButton.position(1000, 475);
-  deleteCarButton.mousePressed(deleteCars);
+  deleteCarButton.mousePressed(reset);
   helpButton = createButton('Help');
   helpButton.position(1000, 500);
   helpButton.mousePressed(toggleHelp);
@@ -81,10 +93,13 @@ function drawSidebarText() {
     currCar = getDraggedCar();
     text("Angular Velocity = " + round(currCar.angvel, 2) + " rad/s", 1000, 250);
     text("Mass = " + currCar.mass + " kg", 1000, 350);
-    // text("F_Centripetal = " + round(currCar.cforce), 1000, 400);
     text("Radius = " + round(currCar.trueradius, 2) + " m", 1000, 100);
-    // text("Raw Radius = " + currCar.radius, 1000, 650);
     text("Velocity = " + round(currCar.velocity, 2) + " m/s", 1000, 150);
+
+    // the below are debug texts
+
+    // text("F_Centripetal = " + round(currCar.cforce), 1000, 400);
+    // text("Raw Radius = " + currCar.radius, 1000, 650);
     // text("angle = " + round(currCar.angle, 2) + " rad", 1000, 600);
     // text("pause = " + pause, 1000, 700);
     // text("dragging = " + currCar.dragging, 800, 650);
@@ -93,31 +108,36 @@ function drawSidebarText() {
 }
 
 function drawTrack() {
+  push();
   fill(63, 63, 71);
   circle(450, 350, 690);
   circle(450, 350, 100);
-  
-  fill(0);
+  pop();
 }
+
 function drawHelp() {
   // nice looking border rectangle with rounded corners, but over whole canvas
   fill(255, 255, 255)
-  rect(50, 50, 900, 500, 20);
+  rect(800, 575, 350, 100, 20);
 
   fill(0);
-  textSize(60);
-  text("Help", 100, 100);
+  textSize(20);
+  text("Help", 850, 650);
   textSize(12);
-  text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track.", 100, 150);
-  text("Mass: \n The mass of the car affects the centripetal force acting on the car. \n The greater the mass, the greater the centripetal force.", 100, 200);
-  text("Angular Velocity: \n The angular velocity of the car affects the centripetal force acting on the car. \n The greater the angular velocity, the greater the centripetal force.", 100, 300);
-  text("Centripetal Force: \n The centripetal force is the force acting on the car towards the centre of the circle.", 100, 400);
-  text("Radius: \n The radius of the track affects the centripetal force acting on the car. \n The greater the radius, the greater the centripetal force.", 100, 500);      
+  text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track.", 800, 600);
 }
 
 
 function drawTutorial() {
-  text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track.", 100, 100);
+  // arrow pointing towards the car from the right
+  push();
+  stroke(0, 0, 0);
+  strokeWeight(2);
+  line(130, 100, 300, 100);
+  line(130, 100, 160, 90);
+  line(130, 100, 160, 110);
+  pop();
+  text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track and press 'play'.", 320, 100);
 }
 
 function mousePressed() {
@@ -177,9 +197,10 @@ function toggleShowVector() {
   }
 }
 
-function deleteCars() {
+function reset() {
   carArray = [];
   carArray.push(new Car(100, 100));
   lastCar = carArray[0];
   uniquelastCar = carArray[0];
+  togglePause();
 }
