@@ -63,6 +63,12 @@ function draw() {
   }
 }
 
+
+
+
+
+// draw functions (no logic)
+
 function drawSidebarSliders() {
   angvelSlider = createSlider(0, 1.5, 1, 0.1);
   angvelSlider.position(1000, 200);
@@ -147,7 +153,6 @@ function drawHelp() {
   pop();
 }
 
-
 function drawTutorial() {
   // arrow pointing towards the car from the right
   push();
@@ -160,35 +165,7 @@ function drawTutorial() {
   text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track and press 'play'.", 320, 100);
 }
 
-function mousePressed() {
-  for (let i = 0; i < carArray.length; i++) {
-    carArray[i].pressed();
-  }
-}
-
-function getDraggedCar() {
-  for (let i = 0; i < carArray.length; i++) {
-    currCar = carArray[i];
-
-    // check which was last moused over
-    if (currCar.dragging) {
-      lastCar = currCar;
-      if (uniquelastCar != lastCar) uniquelastCar = lastCar;
-      return currCar;
-    } 
-    
-    // only car exception
-    if (i == carArray.length - 1) {
-      return lastCar;
-    }
-  }
-}
-
-function mouseReleased() {
-  for (let i = 0; i < carArray.length; i++) {
-    carArray[i].released();
-  }
-}
+// button functions
 
 function toggleHelp() {
   helpshown = !helpshown;
@@ -229,4 +206,36 @@ function reset() {
   uniquelastCar = carArray[0];
   pause = false;
   togglePause();
+}
+
+// miscellaneous functions
+
+function mousePressed() {
+  for (let i = 0; i < carArray.length; i++) {
+    carArray[i].pressed();
+  }
+}
+
+function getDraggedCar() {
+  for (let i = 0; i < carArray.length; i++) {
+    currCar = carArray[i];
+
+    // check which was last moused over
+    if (currCar.dragging) {
+      lastCar = currCar;
+      if (uniquelastCar != lastCar) uniquelastCar = lastCar;
+      return currCar;
+    } 
+    
+    // only car exception
+    if (i == carArray.length - 1) {
+      return lastCar;
+    }
+  }
+}
+
+function mouseReleased() {
+  for (let i = 0; i < carArray.length; i++) {
+    carArray[i].released();
+  }
 }

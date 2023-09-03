@@ -110,6 +110,8 @@ class Car {
         this.scale = map(this.mass, 1000, 2000, 0.8, 1.2);
     }
     
+    // dragging functions
+
     pressed() {
         // Did I click on the rectangle?
         if (this.checkMouseOver()) {
@@ -132,6 +134,8 @@ class Car {
         }
     }
 
+    // update functions, mostly called from sketch
+
     updateAngVel() {
         this.constraints();
         this.angvel = this.velocity / this.trueradius;
@@ -141,6 +145,8 @@ class Car {
         this.constraints();
         this.velocity = this.angvel * this.trueradius;
     }
+
+    // constrain functions
 
     contraints() {
         constrain(0, 1.5, this.angvel);
