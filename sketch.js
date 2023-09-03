@@ -128,6 +128,15 @@ function drawHelp() {
   text(" The blue arrow represents the \n centripetal force acting on the car. \n\n The red arrow represents the \n velocity of the car.", 755, 75);
   pop();
 
+  // how to edit cars
+  push();
+  fill(0, 0, 0, 0);
+  rect(810, 200, 140, 170, 20);
+  fill(0);
+  textSize(12);
+  text(" Click on a car and use\n sliders to edit its\n attributes. \n\n Press 'Create Car' to\n add a new car. \n\n Press 'Reset' to delete\n all cars.", 815, 225);
+  pop();
+
   // thinking questions
   push();
   fill(0, 0, 0, 0);

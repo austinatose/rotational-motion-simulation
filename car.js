@@ -4,7 +4,7 @@ class Car {
         this.pos = createVector(xpos, ypos);
         this.angvel = 1; // radians per second
         this.angle = 0; // radians, from rotcentre
-        this.velocity = 17.25;
+        this.velocity = 17.25; // tangential to circular path
         this.mass = 1500;
         this.sizemult = 1; // changes with mass
         this.rotcentre = createVector(450, 350); // pivot point (centre of track)
@@ -75,11 +75,11 @@ class Car {
                 pop();
             }
         }
-
         pop();
     }
 
     update() {
+        // car becomes straight when out of track
         if (this.checkOOB()) {
             this.angle = 0;
         }
