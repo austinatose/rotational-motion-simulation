@@ -1,6 +1,9 @@
+// contains car objects
 let carArray = [];
 let lastCar;
 let uniquelastCar;
+
+// states
 let pause = true;
 let helpshown = false;
 let tutorialshown = true;
@@ -13,7 +16,7 @@ function setup() {
   lastCar = carArray[0];
   uniquelastCar = carArray[0];
 
-  // needs to be drawn separately from text
+  // sliders need to be drawn separately from text
   drawSidebarSliders();
 }
 
@@ -62,10 +65,6 @@ function draw() {
     drawTutorial();
   }
 }
-
-
-
-
 
 // draw functions (no logic)
 
@@ -166,6 +165,7 @@ function drawTutorial() {
 }
 
 // button functions
+// recreating buttons are necessary to change text
 
 function toggleHelp() {
   helpshown = !helpshown;
@@ -202,13 +202,14 @@ function toggleShowVector() {
 function reset() {
   carArray = [];
   carArray.push(new Car(100, 100));
+  // sidebar reflects the only car existing
   lastCar = carArray[0];
   uniquelastCar = carArray[0];
   pause = false;
   togglePause();
 }
 
-// miscellaneous functions
+// car dragging functions
 
 function mousePressed() {
   for (let i = 0; i < carArray.length; i++) {
@@ -235,6 +236,7 @@ function getDraggedCar() {
 }
 
 function mouseReleased() {
+  // it is certain that no cars are being dragged
   for (let i = 0; i < carArray.length; i++) {
     carArray[i].released();
   }
