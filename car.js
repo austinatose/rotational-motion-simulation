@@ -1,5 +1,4 @@
 class Car {
-    // rectangle placeholder for now, will replace with image of car
     constructor(xpos, ypos) {
         this.pos = createVector(xpos, ypos);
         this.angvel = 1; // radians per second
