@@ -113,7 +113,7 @@ class Car {
     // dragging functions
 
     pressed() {
-        // Did I click on the rectangle?
+        // Did I click on the car?
         if (this.checkMouseOver()) {
             this.dragging = true;
             

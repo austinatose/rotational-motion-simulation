@@ -1,7 +1,6 @@
 // contains car objects
 let carArray = [];
 let lastCar;
-let uniquelastCar;
 
 // states
 let pause = true;
@@ -14,7 +13,6 @@ function setup() {
   angleMode(RADIANS);
   carArray.push(new Car(100, 100));
   lastCar = carArray[0];
-  uniquelastCar = carArray[0];
 
   // sliders need to be drawn separately from text
   drawSidebarSliders();
@@ -57,7 +55,7 @@ function draw() {
   // tutorial handling
 
   // hide tutorial upon first drag of car
-  if (tutorialshown && uniquelastCar.dragging) {
+  if (tutorialshown && carArray[0].dragging) {
     tutorialshown = false;
   }
 
@@ -204,7 +202,6 @@ function reset() {
   carArray.push(new Car(100, 100));
   // sidebar reflects the only car existing
   lastCar = carArray[0];
-  uniquelastCar = carArray[0];
   pause = false;
   togglePause();
 }
@@ -224,13 +221,12 @@ function getDraggedCar() {
     // check which was last moused over
     if (currCar.dragging) {
       lastCar = currCar;
-      if (uniquelastCar != lastCar) uniquelastCar = lastCar;
       return currCar;
     } 
     
     // only car exception
     if (i == carArray.length - 1) {
-      return lastCar;
+      return carArray[0];
     }
   }
 }
