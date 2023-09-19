@@ -201,14 +201,14 @@ function drawHelp() {
 function drawTutorial() {
   // arrow pointing towards the car from the right
   push();
-  stroke(255, 186, 100);
+  stroke(128, 128, 128);
   strokeWeight(2);
   line(130, 100, 300, 100);
   line(130, 100, 160, 90);
   line(130, 100, 160, 110);
   pop();
   push();
-  fill(255, 186, 100);
+  fill(128, 128, 128);
   text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track and press 'play'.", 320, 100);
   pop();
 }

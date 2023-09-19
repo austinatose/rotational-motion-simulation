@@ -51,7 +51,7 @@ class Car {
             // only if arrow is long enough
             if (this.cforce / 70 > 100) {
                 push();
-                stroke(255, 186, 0);
+                fill(128, 128, 128);
                 text(round(this.cforce, 2) + "N", -this.cforce / 70 / 2, -10);
                 pop();
             }
@@ -69,7 +69,7 @@ class Car {
             // only if arrow is long enough
             if (this.velocity * 10 > 80) {
                 push();
-                stroke(255, 186, 0);
+                fill(128, 128, 128);
                 text(round(this.velocity, 2) + "m/s", 10, -this.velocity * 10 / 2);
                 pop();
             }
