@@ -22,6 +22,7 @@ function setup() {
 // console.log(carArray);
 
 function draw() {
+  frameRate(120);
   background(220);
   drawTrack();
   drawSidebarText();
@@ -117,8 +118,55 @@ function drawTrack() {
   push();
   fill(63, 63, 71);
   circle(450, 350, 690);
+  fill(220);
   circle(450, 350, 100);
   pop();
+
+  /*
+  // draw curbs of track in red and white
+  // 360 in total
+  for (let i = 0; i < 20; i++) {
+
+    push();
+    angleMode(DEGREES);
+    if (i % 2 == 0) {
+      stroke(255, 235, 235);
+    } else {
+      stroke(255, 0, 0);
+    }
+    arc(450, 350, 690, 690, i * 18, (i + 1) * 18);
+    strokeWeight(7);
+    translate(450, 350);
+    rotate((i * 18 + j)); 
+    line(0, 320, 0, 350);
+    pop();
+
+  }
+
+  // same for the inner circle
+  for (let i = 0; i < 20; i++) {
+    for(let j = 0; j < 18; j++) {
+      push();
+      angleMode(DEGREES);
+      if (i % 2 == 0) {
+        stroke(255, 235, 235);
+      } else {
+        stroke(255, 0, 0);
+      }
+      strokeWeight(7);
+      translate(450, 350);
+      rotate((i * 18 + j)); 
+      rect(0, 50, 0, 80);
+      pop();
+    }
+  }
+
+  // draw centre of circle
+  push();
+  fill(0, 0, 0);
+  circle(450, 350, 10);
+  pop();
+  */
 }
 
 function drawHelp() {
@@ -153,13 +201,16 @@ function drawHelp() {
 function drawTutorial() {
   // arrow pointing towards the car from the right
   push();
-  stroke(0, 0, 0);
+  stroke(255, 186, 100);
   strokeWeight(2);
   line(130, 100, 300, 100);
   line(130, 100, 160, 90);
   line(130, 100, 160, 110);
   pop();
+  push();
+  fill(255, 186, 100);
   text("Find out what affects the centripetal force acting on the car. \n Get started by dragging the car onto the track and press 'play'.", 320, 100);
+  pop();
 }
 
 // button functions

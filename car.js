@@ -51,7 +51,7 @@ class Car {
             // only if arrow is long enough
             if (this.cforce / 70 > 100) {
                 push();
-                fill(0, 0, 0);
+                stroke(255, 186, 0);
                 text(round(this.cforce, 2) + "N", -this.cforce / 70 / 2, -10);
                 pop();
             }
@@ -69,7 +69,7 @@ class Car {
             // only if arrow is long enough
             if (this.velocity * 10 > 80) {
                 push();
-                fill(0, 0, 0);
+                stroke(255, 186, 0);
                 text(round(this.velocity, 2) + "m/s", 10, -this.velocity * 10 / 2);
                 pop();
             }
@@ -103,10 +103,11 @@ class Car {
             this.pos.y = this.rotcentre.y + sin(this.angle) * this.radius;
         }
 
-        this.trueradius = map(this.radius, 100, 300, 4, 19); //
         this.velocity = this.angvel * this.trueradius;
         this.cforce = this.mass * this.trueradius * this.angvel * this.angvel;
-
+        
+        // making values realistic for display or calculations
+        this.trueradius = map(this.radius, 100, 300, 4, 19);
         this.scale = map(this.mass, 1000, 2000, 0.8, 1.2);
     }
     
